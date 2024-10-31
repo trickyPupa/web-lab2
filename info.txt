@@ -1,0 +1,13 @@
+ports:
+    http server - 43485
+    https server - 43486
+    manager - 43490
+    https manager - 43491
+
+~/web/lab2/wildfly-34.0.0.Final/bin/standalone.sh
+~/web/lab2/wildfly-34.0.0.Final/bin/standalone.sh &> /dev/null &
+
+helios connection:
+ssh -p 2222 s408966@helios.cs.ifmo.ru
+ssh -p 2222 -L 43485:localhost:43485 s408966@helios.cs.ifmo.ru
+ssh -p 2222 -L 43490:localhost:43490 s408966@helios.cs.ifmo.ru
