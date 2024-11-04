@@ -69,16 +69,24 @@ function submitForm(event) {
 
 function sendData(x, y, r) {
     fetch(url + `?x=${x}&y=${y}&r=${r}`, { method: "GET" })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message){
-                createError(data.message);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(response.statusText)
             }
-            else {
-                // addToTable(x, y, r, data.status, data.time, new Date().toLocaleTimeString());
-                console.log("row added");
-                // drawDot(x, y, r, data.status);
-            }
+            return response.text();
+        })
+        .then(html => {
+            // if (data.message){
+            //     createError(data.message);
+            // }
+            // else {
+            //     addToTable(x, y, r, data.status, data.time, new Date().toLocaleTimeString());
+            //     console.log("row added");
+            //     drawDot(x, y, r, data.status);
+            // }
+            document.open();
+            document.write(html);
+            document.close();
         })
         .catch((err) => {
             createError(err)
