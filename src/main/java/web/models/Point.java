@@ -1,9 +1,11 @@
 package web.models;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
-public class Point {
+public class Point implements Serializable {
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
 
     private final double x;
@@ -55,5 +57,18 @@ public class Point {
                 ", is in area = " + status +
                 ", execution time = " + executionTime +
                 "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return Double.compare(x, point.x) == 0 && Double.compare(y, point.y) == 0 && Double.compare(r, point.r) == 0 && Double.compare(executionTime, point.executionTime) == 0 && status == point.status && Objects.equals(datetime, point.datetime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, r, executionTime, datetime, status);
     }
 }

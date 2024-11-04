@@ -28,9 +28,9 @@ public class AreaCheckServlet extends HttpServlet {
 
         logger.info("Area check result: {}", result);
 
-//        request.setAttribute("x", x);
-//        request.setAttribute("y", y);
-//        request.setAttribute("r", r);
+        request.setAttribute("x", x);
+        request.setAttribute("y", y);
+        request.setAttribute("r", r);
         request.setAttribute("result", result);
 
 

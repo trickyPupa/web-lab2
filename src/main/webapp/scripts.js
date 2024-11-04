@@ -1,6 +1,7 @@
 const url = "controller"
 
 function createError(message) {
+    console.log(message);
     const error = document.getElementById("text-error");
     error.textContent = message;
 }
@@ -43,7 +44,8 @@ function validate(x, y, r) {
     ]);
 }
 
-function submitForm() {
+function submitForm(event) {
+    event.preventDefault();
     const x = document.getElementById("x");
     const y = document.querySelector('.btn.active');
     const r = document.querySelector('.r-checkbox:checked');
@@ -53,19 +55,20 @@ function submitForm() {
         createError("y не определен");
     }
     else if (!r) {
-        createError("r не определен")
+        createError("r не определен");
     }
     else {
-        validate(x.value, y.value, r.value).then(() => {
-            sendData(x.value, y.value, r.value);
-        }).catch((error) => {
-            createError(error);
-        });
+        validate(x.value, y.value, r.value)
+            .then(() => {
+                sendData(x.value, y.value, r.value);
+            }).catch((error) => {
+                createError(error);
+            });
     }
 }
 
 function sendData(x, y, r) {
-    fetch(url + `?x=${x}&y=${y}&r=${r}`)
+    fetch(url + `?x=${x}&y=${y}&r=${r}`, { method: "GET" })
         .then(response => response.json())
         .then(data => {
             if (data.message){
@@ -76,11 +79,10 @@ function sendData(x, y, r) {
                 console.log("row added");
                 // drawDot(x, y, r, data.status);
             }
+        })
+        .catch((err) => {
+            createError(err)
         });
-
-    // const xhr = new XMLHttpRequest();
-    // xhr.open('GET', url + `?x=${x}&y=${y}&r=${r}`);
-    // xhr.send();
 }
 
 function addToTable(x, y, r, status, time, data) {
