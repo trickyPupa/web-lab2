@@ -42,7 +42,7 @@ public class ControllerServlet extends HttpServlet {
             double r = Double.parseDouble(rParam);
 
             return -3 <= x && x <= 5 && -3 <= y && y <= 5 && 1 <= r && r <= 5;
-        } catch ( NumberFormatException e ) {
+        } catch ( NumberFormatException | NullPointerException e ) {
             return false;
         }
     }

@@ -16,13 +16,13 @@ public class AreaCheckServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(AreaCheckServlet.class);
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         double x = Double.parseDouble(request.getParameter("x"));
         double y = Double.parseDouble(request.getParameter("y"));
         double r = Double.parseDouble(request.getParameter("r"));
-        double startTime = Double.parseDouble(request.getParameter("startTime"));
+        long startTime = (Long) request.getAttribute("startTime");
 
-        logger.info("Received POST request with parameters: x={}, y={}, r={}", x, y, r);
+        logger.info("Received GET request with parameters: x={}, y={}, r={}", x, y, r);
 
         boolean result = checkArea(x, y, r);
 
