@@ -1,4 +1,10 @@
-const canvas = document.getElementById('canvas');
+// const graph = document.querySelector('.graph')
+// const canvas = document.createElement('canvas');
+// canvas.setAttribute('height', '400');
+// canvas.setAttribute('width', '400');
+// canvas.setAttribute("id", "canvas")
+// graph.appendChild(canvas);
+const canvas = document.getElementById('canvas1') || document.getElementById('canvas2');
 const context = canvas.getContext('2d');
 
 canvas.width = 400;
@@ -138,9 +144,11 @@ function drawCoords() {
 
 }
 
-drawGrid();
-drawCircle(canvas.width / 2, canvas.height / 2, R);
-drawRect(canvas.width / 2, canvas.height / 2, -R / 2, -R);
-drawTriangle(canvas.width / 2, canvas.height / 2, canvas.width / 2, canvas.height / 2 + R, canvas.width / 2 - R, canvas.height / 2);
-drawAxis();
-drawCoords();
+window.onload = function () {
+    drawGrid();
+    drawCircle(canvas.width / 2, canvas.height / 2, R);
+    drawRect(canvas.width / 2, canvas.height / 2, -R / 2, -R);
+    drawTriangle(canvas.width / 2, canvas.height / 2, canvas.width / 2, canvas.height / 2 + R, canvas.width / 2 - R, canvas.height / 2);
+    drawAxis();
+    drawCoords();
+}

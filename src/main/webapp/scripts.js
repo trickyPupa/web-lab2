@@ -125,7 +125,7 @@ function addToTable(x, y, r, status, time, data) {
 }
 
 function drawDot(x, y, r, status) {
-    const canvas = document.getElementById('canvas');
+    const canvas = document.getElementById('canvas1') || document.getElementById('canvas2');
     const ctx = canvas.getContext('2d');
     const formula = (coord, radius) => (200 + (4 * coord * 40) / radius);
     ctx.beginPath();
@@ -154,8 +154,8 @@ function checkOnly(checkbox, cls) {
     });
 }
 
-function addDotByClick() {
-    document.getElementById('canvas').addEventListener('click', function (event) {
+function addDotByClick(element) {
+    element.addEventListener('click', function (event) {
         const svg = document.getElementById('graph');
         const pt = svg.createSVGPoint();
         const errorMessage = document.getElementById("error-message");
@@ -189,5 +189,7 @@ function addDotByClick() {
             })
     });
 }
+
+addDotByClick(document.getElementById('canvas1') || document.getElementById('canvas2'));
 
 // addToTable(1, 1, 1, true, 12, 'now');

@@ -30,7 +30,7 @@
 		<tr>
 			<td>
 				<div class="graph">
-					<canvas id="canvas" width="400" height="400"></canvas>
+					<canvas id="canvas1" width="400" height="400"></canvas>
 				</div>
 			</td>
 			<td>
@@ -93,7 +93,7 @@
 		</tr>
 		</tbody>
 	</table>
-	<script src="graph.js"></script>
 	<script src="scripts.js"></script>
+	<script src="graph.js"></script>
 </body>
 </html>

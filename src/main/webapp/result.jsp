@@ -11,53 +11,55 @@
     <title>я тима</title>
 </head>
 <body>
-<header class="header">Результаты</header>
+    <header class="header">Результаты</header>
 
-<div class="graph">
-    <canvas id="canvas" width="400" height="400"></canvas>
-</div>
+    <div class="graph">
+        <canvas id="canvas2" width="400" height="400"></canvas>
+    </div>
 
-<div class="records center-wrapper">
-    <table class="records-table">
-        <caption class="caption">Результаты</caption>
-        <thead>
-        <tr>
-            <th>X</th>
-            <th>Y</th>
-            <th>R</th>
-            <th>Статус</th>
-            <th>Время выполнения, мс</th>
-            <th>Дата и время</th>
-        </tr>
-        </thead>
-        <tbody id="records-body">
-        <%
-            ResultBean results = (ResultBean) session.getAttribute("resultBean");
-            if (results != null) {
-                for (Point result : results.getList()) {
-        %>
-        <tr>
-            <td><%= result.getX() %></td>
-            <td><%= result.getY() %></td>
-            <td><%= result.getR() %></td>
-            <td><%= result.getStatus() ? "Попадание" : "Промах" %></td>
-            <td><%= result.getExecutionTime() %></td>
-            <td><%= result.getDatetime() %></td>
-        </tr>
-        <script>drawDot("<%= result.getX() %>", "<%= result.getY() %>", "<%= result.getR() %>", "<%= result.getStatus() %>")</script>
-        <%
+    <div class="records center-wrapper">
+        <table class="records-table">
+            <caption class="caption">Результаты</caption>
+            <thead>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>R</th>
+                <th>Статус</th>
+                <th>Время выполнения, мс</th>
+                <th>Дата и время</th>
+            </tr>
+            </thead>
+            <tbody id="records-body">
+            <%
+                ResultBean results = (ResultBean) session.getAttribute("resultBean");
+                if (results != null) {
+                    for (Point result : results.getList()) {
+            %>
+            <tr>
+                <td><%= result.getX() %></td>
+                <td><%= result.getY() %></td>
+                <td><%= result.getR() %></td>
+                <td><%= result.getStatus() ? "Попадание" : "Промах" %></td>
+                <td><%= result.getExecutionTime() %></td>
+                <td><%= result.getDatetime() %></td>
+            </tr>
+            <script>drawDot("<%= result.getX() %>", "<%= result.getY() %>", "<%= result.getR() %>", "<%= result.getStatus() %>")</script>
+            <%
+                    }
                 }
-            }
-        %>
-        </tbody>
-    </table>
+            %>
+            </tbody>
+        </table>
 
-    <button class="back">
-        <a href="index.jsp">На главную</a>
-    </button>
-</div>
+        <div>
+        <button class="back-button">
+            <a href="index.jsp">На главную</a>
+        </button>
+        </div>
+    </div>
 
-<script src="graph.js"></script>
-<script src="scripts.js"></script>
+    <script src="scripts.js"></script>
+    <script src="graph.js"></script>
 </body>
 </html>

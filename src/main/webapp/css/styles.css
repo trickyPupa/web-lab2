@@ -119,6 +119,11 @@ label {
 	font-size: 1.5em;
 }
 
+.back-button {
+	margin-top: 0.5em;
+	text-decoration: none;
+}
+
 .records-table {
 	border: 2px var(--ultra-dark-pink) solid;
 	border-collapse: collapse;
