@@ -1,6 +1,8 @@
 <%@ page import="web.beans.ResultBean" %>
 <%@ page import="web.models.Point" %>
 <%@ page import="java.util.Locale" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -49,7 +51,11 @@
                 <%
                     ResultBean results = (ResultBean) session.getAttribute("resultBean");
                     if (results != null) {
-                        for (Point result : results.getList()) {
+                        ArrayList<Point> list = results.getList();
+                        Collections.reverse(list);
+                        double currentR = list.get(0).getR();
+
+                        for (Point result : list) {
                 %>
                 <tr>
                     <td><%= result.getX() %></td>
@@ -59,7 +65,7 @@
                     <td><%= String.format(Locale.ENGLISH, "%.4f", result.getExecutionTime()) %></td>
                     <td><%= result.getDatetime() %></td>
                 </tr>
-                <script>drawDot("<%= result.getX() %>", "<%= result.getY() %>", "<%= result.getR() %>", <%= result.getStatus() %>)</script>
+                <script>drawDot("<%= result.getX() %>", "<%= result.getY() %>", "<%= currentR %>", <%= result.getStatus() %>)</script>
                 <%
                         }
                     }

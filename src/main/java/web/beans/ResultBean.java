@@ -3,19 +3,18 @@ package web.beans;
 import web.models.Point;
 
 import java.io.Serializable;
-import java.util.ArrayDeque;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class ResultBean implements Serializable {
 
-    private final ArrayDeque<Point> list = new ArrayDeque<>();
+    private final ArrayList<Point> list = new ArrayList<>();
 
     public void add(Point p) {
-        list.addFirst(p);
+        list.add(p);
     }
 
-    public Collection<Point> getList() {
+    public ArrayList<Point> getList() {
         return list;
     }
 
