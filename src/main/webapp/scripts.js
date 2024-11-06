@@ -117,40 +117,8 @@ function sendData(x, y, r) {
         });
 }
 
-
 // отрисовка
-function addToTable(x, y, r, status, time, data) {
-    const tableBody = document.getElementById("records-body");
-    const row = document.createElement("tr");
-    row.className = "row";
-    const xtd = document.createElement("td");
-    xtd.className = "item";
-    xtd.textContent = x;
-    row.appendChild(xtd);
-    const ytd = document.createElement("td");
-    ytd.className = "item";
-    ytd.textContent = y;
-    row.appendChild(ytd);
-    const rtd = document.createElement("td");
-    rtd.className = "item";
-    rtd.textContent = r;
-    row.appendChild(rtd);
-    const stattd = document.createElement("td");
-    stattd.className = "item";
-    stattd.textContent = status;
-    row.appendChild(stattd);
-    const timetd = document.createElement("td");
-    timetd.className = "item";
-    timetd.textContent = time;
-    row.appendChild(timetd);
-    const datetd = document.createElement("td");
-    datetd.className = "item";
-    datetd.textContent = data;
-    row.appendChild(datetd);
-    tableBody.prepend(row);
-}
-
-function drawDot(x, y, r, status, isLast = false) {
+function drawDot(x, y, r, status) {
     const canvas = document.getElementById('canvas1') || document.getElementById('canvas2');
     const ctx = canvas.getContext('2d');
     const formula = (coord, radius) => (200 + (4 * coord * 40) / radius);

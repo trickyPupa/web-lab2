@@ -16,7 +16,7 @@ public class AreaCheckServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(AreaCheckServlet.class);
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         double x = Double.parseDouble(request.getParameter("x"));
         double y = Double.parseDouble(request.getParameter("y"));
         double r = Double.parseDouble(request.getParameter("r"));
