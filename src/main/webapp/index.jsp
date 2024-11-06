@@ -10,6 +10,9 @@
 	<title>я тима</title>
 </head>
 <body>
+	<script src="scripts.js"></script>
+	<script src="graph.js"></script>
+
 	<header class="header">
 		<div class="fio">
 			Лабор Тимофей Владимирович
@@ -31,6 +34,11 @@
 			<td>
 				<div class="graph">
 					<canvas id="canvas1" width="400" height="400"></canvas>
+					<script>
+						graphInit();
+						const canvas = document.getElementById('canvas1');
+						canvas.addEventListener('click', (event) => byClick(event, canvas, R));
+					</script>
 				</div>
 			</td>
 			<td>
@@ -91,9 +99,14 @@
 				</form>
 			</td>
 		</tr>
+		<tr>
+			<td colspan="2">
+				<button class="link-button">
+					<a href="result.jsp">На страницу с результатами</a>
+				</button>
+			</td>
+		</tr>
 		</tbody>
 	</table>
-	<script src="scripts.js"></script>
-	<script src="graph.js"></script>
 </body>
 </html>

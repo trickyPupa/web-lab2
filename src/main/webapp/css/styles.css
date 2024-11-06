@@ -23,6 +23,7 @@ header {
 
 body {
 	background: #FFDCE2;
+	place-items: center;
 }
 
 .main{
@@ -110,18 +111,22 @@ label {
 
 .caption {
 	font-weight: bold;
-	font-size: 1.7em;
+	font-size: 1.5em;
 	margin-bottom: 0.5em;
 }
 
 .records {
 	text-align: center;
-	font-size: 1.5em;
+	font-size: 1.3em;
 }
 
-.back-button {
-	margin-top: 0.5em;
+.link-button {
+	margin-top: 0.6em;
+}
+
+.link-button a {
 	text-decoration: none;
+	color: inherit;
 }
 
 .records-table {
@@ -141,4 +146,8 @@ label {
 	height: 0.5em;
 	margin-top: -1.2em;
 	margin-bottom: 2em;
+}
+
+.graph {
+	text-align: center;
 }

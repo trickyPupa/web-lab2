@@ -44,16 +44,17 @@ public class AreaCheckServlet extends HttpServlet {
         }
 
         logger.info("Adding result to ResultBean: x={}, y={}, r={}, result={}", x, y, r, result);
-        resultBean.add(new Point(x, y, r, result, System.nanoTime() - startTime));
+        resultBean.add(new Point(x, y, r, result,
+                (double)(System.nanoTime() - startTime) / 1000000));
 
         logger.info("Forwarding to /result.jsp");
-        getServletContext().getRequestDispatcher("/result.jsp").forward(request, response);
+        response.sendRedirect("/result.jsp");
     }
 
     private boolean checkArea(double x, double y, double r) {
         boolean rect = x <= 0 && y >= 0 && x >= -r/2 && y <= r;
         boolean circle = x >= 0 && y <= 0 && x*x + y*y <= r*r;
-        boolean triangle = x <= 0 && y <= 0 && y > -x - r;
+        boolean triangle = x <= 0 && y <= 0 && y >= -x - r;
 
         return rect || circle || triangle;
     }

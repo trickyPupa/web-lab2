@@ -1,19 +1,7 @@
-// const graph = document.querySelector('.graph')
-// const canvas = document.createElement('canvas');
-// canvas.setAttribute('height', '400');
-// canvas.setAttribute('width', '400');
-// canvas.setAttribute("id", "canvas")
-// graph.appendChild(canvas);
-const canvas = document.getElementById('canvas1') || document.getElementById('canvas2');
-const context = canvas.getContext('2d');
-
-canvas.width = 400;
-canvas.height = 400;
 const R = 160;
 const fillColor = "lightpink";
 
-
-function drawAxis() {
+function drawAxis(canvas, context) {
     context.beginPath();
     context.moveTo(0, canvas.height / 2);
     context.lineTo(canvas.width, canvas.height / 2);
@@ -29,7 +17,7 @@ function drawAxis() {
     context.stroke();
 }
 
-function drawGrid() {
+function drawGrid(canvas, context) {
     context.beginPath();
     for (let x = 0; x < 400; x += 40) {
         context.moveTo(x, 0);
@@ -47,7 +35,7 @@ function drawGrid() {
     }
 }
 
-function drawCircle(x, y, r) {
+function drawCircle(context, x, y, r) {
     context.beginPath();
     context.moveTo(x, y);
     context.fillStyle = fillColor;
@@ -56,7 +44,7 @@ function drawCircle(x, y, r) {
     context.fill();
 }
 
-function drawRect(x, y, w, h) {
+function drawRect(context, x, y, w, h) {
     context.beginPath();
     context.moveTo(x, y);
     context.fillStyle = fillColor;
@@ -65,7 +53,7 @@ function drawRect(x, y, w, h) {
     context.fill();
 }
 
-function drawTriangle(x1, y1, x2, y2, x3, y3) {
+function drawTriangle(context, x1, y1, x2, y2, x3, y3) {
     context.beginPath();
     context.moveTo(x1, y1);
     context.fillStyle = fillColor;
@@ -75,7 +63,7 @@ function drawTriangle(x1, y1, x2, y2, x3, y3) {
     context.fill();
 }
 
-function drawCoords() {
+function drawCoords(canvas, context) {
 	const centerX = canvas.width / 2;
 	const centerY = canvas.height / 2;
 	const gap = 30;
@@ -144,11 +132,17 @@ function drawCoords() {
 
 }
 
-window.onload = function () {
-    drawGrid();
-    drawCircle(canvas.width / 2, canvas.height / 2, R);
-    drawRect(canvas.width / 2, canvas.height / 2, -R / 2, -R);
-    drawTriangle(canvas.width / 2, canvas.height / 2, canvas.width / 2, canvas.height / 2 + R, canvas.width / 2 - R, canvas.height / 2);
-    drawAxis();
-    drawCoords();
+function graphInit(){
+    const canvas = document.getElementById('canvas1') || document.getElementById('canvas2');
+    const context = canvas.getContext('2d');
+
+    canvas.width = 400;
+    canvas.height = 400;
+
+    drawGrid(canvas, context);
+    drawCircle(context, canvas.width / 2, canvas.height / 2, R);
+    drawRect(context, canvas.width / 2, canvas.height / 2, -R / 2, -R);
+    drawTriangle(context, canvas.width / 2, canvas.height / 2, canvas.width / 2, canvas.height / 2 + R, canvas.width / 2 - R, canvas.height / 2);
+    drawAxis(canvas, context);
+    drawCoords(canvas, context);
 }
