@@ -118,10 +118,14 @@ label {
 .records {
 	text-align: center;
 	font-size: 1.3em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .link-button {
-	margin-top: 0.6em;
+	margin-top: 1em;
+	align-self: center;
 }
 
 .link-button a {
@@ -150,4 +154,8 @@ label {
 
 .graph {
 	text-align: center;
+}
+
+.placeholder {
+	visibility: hidden;
 }

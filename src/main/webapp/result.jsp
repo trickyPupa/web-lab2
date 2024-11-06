@@ -15,7 +15,13 @@
     <script src="scripts.js"></script>
     <script src="graph.js"></script>
 
-    <header class="header">Результаты</header>
+    <header class="header">
+        <div class="fio">
+            Лабор Тимофей Владимирович
+        </div>
+        <div>Результаты</div>
+        <div class="placeholder">placeholder</div>
+    </header>
 
     <div class="main">
         <div class="graph">
@@ -24,6 +30,10 @@
         </div>
 
         <div class="records center-wrapper">
+            <button class="link-button">
+                <a href="index.jsp">На главную</a>
+            </button>
+
             <table class="records-table">
                 <thead>
                 <tr>
@@ -56,12 +66,6 @@
                 %>
                 </tbody>
             </table>
-
-            <div>
-                <button class="link-button">
-                    <a href="index.jsp">На главную</a>
-                </button>
-            </div>
         </div>
     </div>
 </body>
