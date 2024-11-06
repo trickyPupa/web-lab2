@@ -98,6 +98,7 @@ label {
 	height: 1.5em;
 	appearance: none;
 	border: 2px solid #C71585;
+	padding: 10px 10px;
 }
 
 .r-checkbox:checked {
@@ -131,6 +132,8 @@ label {
 .link-button a {
 	text-decoration: none;
 	color: inherit;
+	display: block;
+	padding: 10px 15px;
 }
 
 .records-table {
