@@ -33,16 +33,4 @@ public class ControllerServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
         }
     }
-
-    protected boolean validate(String xParam, String yParam, String rParam) {
-        try {
-            double x = Double.parseDouble(xParam);
-            double y = Double.parseDouble(yParam);
-            double r = Double.parseDouble(rParam);
-
-            return -1.25 * r <= x && x <= 1.25 * r && -1.25 * r <= y && y <= 1.25 * r && 1 <= r && r <= 5;
-        } catch ( NumberFormatException | NullPointerException e ) {
-            return false;
-        }
-    }
 }

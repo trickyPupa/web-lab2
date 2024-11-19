@@ -27,14 +27,6 @@ public class AreaCheckServlet extends HttpServlet {
         boolean result = checkArea(data.getX(), data.getY(), data.getR());
         logger.info("Area check result: {}", result);
 
-//        HttpSession session = request.getSession();
-//        ResultBean resultBean = (ResultBean) session.getAttribute("resultBean");
-//        if (resultBean == null) {
-//            logger.info("Creating new ResultBean for session");
-//            resultBean = new ResultBean();
-//            session.setAttribute("resultBean", resultBean);
-//        }
-
         SingletonBean resultBean = SingletonBean.getInstance();
 
         logger.info("Adding result to ResultBean: x={}, y={}, r={}, result={}",

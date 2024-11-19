@@ -12,7 +12,7 @@ public class Point implements Serializable {
     private final double y;
     private final double r;
     private final double executionTime;
-    private final String datetime;
+    private final LocalDateTime datetime;
 
     private final boolean status;
 
@@ -22,7 +22,7 @@ public class Point implements Serializable {
         this.r = r;
         this.status = status;
         this.executionTime = executionTime;
-        datetime = LocalDateTime.now().format(formatter);
+        datetime = LocalDateTime.now();
     }
 
     public double getX() {
@@ -45,7 +45,11 @@ public class Point implements Serializable {
         return executionTime;
     }
 
-    public String getDatetime() {
+    public String getFormattedDatetime() {
+        return datetime.format(formatter);
+    }
+
+    public LocalDateTime getDatetime() {
         return datetime;
     }
 

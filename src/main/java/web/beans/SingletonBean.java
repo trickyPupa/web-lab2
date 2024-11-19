@@ -3,20 +3,17 @@ package web.beans;
 import jakarta.enterprise.context.ApplicationScoped;
 import web.models.Point;
 
-import java.util.ArrayList;
+import java.util.*;
 
 @ApplicationScoped
 public class SingletonBean {
-    private static SingletonBean instance = null;
+    private static final SingletonBean instance = new SingletonBean();
 
-    private final ArrayList<Point> list = new ArrayList<>();
+    private final TreeSet<Point> list = new TreeSet<>(Comparator.comparing(Point::getDatetime));
 
     private SingletonBean() {}
 
     public static SingletonBean getInstance() {
-        if (instance == null) {
-            instance =  new SingletonBean();
-        }
         return instance;
     }
 
@@ -25,6 +22,6 @@ public class SingletonBean {
     }
 
     public ArrayList<Point> getList() {
-        return list;
+        return new ArrayList<>(list);
     }
 }

@@ -66,7 +66,7 @@
                     <td><%= result.getR() %></td>
                     <td><%= result.getStatus() ? "Попадание" : "Промах" %></td>
                     <td><%= String.format(Locale.ENGLISH, "%.4f", result.getExecutionTime()) %></td>
-                    <td><%= result.getDatetime() %></td>
+                    <td><%= result.getFormattedDatetime() %></td>
                 </tr>
                 <script>drawDot("<%= result.getX() %>", "<%= result.getY() %>", "<%= currentR %>", <%= result.getStatus() %>)</script>
                 <%
