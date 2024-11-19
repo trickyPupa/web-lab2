@@ -1,5 +1,6 @@
 package web.servlets;
 
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,30 +9,29 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import web.beans.ResultBean;
 import web.models.Point;
+import web.utils.PointCheckRequestDTO;
 
 import java.io.IOException;
 
+@WebServlet("/check")
 public class AreaCheckServlet extends HttpServlet {
     private static final Logger logger = LogManager.getLogger(AreaCheckServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        double x = Double.parseDouble(request.getParameter("x"));
-        double y = Double.parseDouble(request.getParameter("y"));
-        double r = Double.parseDouble(request.getParameter("r"));
-        long startTime = (Long) request.getAttribute("startTime");
+        PointCheckRequestDTO data = (PointCheckRequestDTO) request.getAttribute("data");
+        logger.info("Received GET request with parameters: x={}, y={}, r={}", data.getX(), data.getY(), data.getR());
 
-        logger.info("Received GET request with parameters: x={}, y={}, r={}", x, y, r);
-
-        boolean result = checkArea(x, y, r);
-
+        boolean result = checkArea(data.getX(), data.getY(), data.getR());
         logger.info("Area check result: {}", result);
 
-        request.setAttribute("x", x);
-        request.setAttribute("y", y);
-        request.setAttribute("r", r);
-        request.setAttribute("result", result);
-
+//        HttpSession session = request.getSession();
+//        ResultBean resultBean = (ResultBean) session.getAttribute("resultBean");
+//        if (resultBean == null) {
+//            logger.info("Creating new ResultBean for session");
+//            resultBean = new ResultBean();
+//            session.setAttribute("resultBean", resultBean);
+//        }
 
         HttpSession session = request.getSession();
         ResultBean resultBean = (ResultBean) session.getAttribute("resultBean");
@@ -41,10 +41,10 @@ public class AreaCheckServlet extends HttpServlet {
             resultBean = new ResultBean();
             session.setAttribute("resultBean", resultBean);
         }
-
+        double x = data.getX(), y = data.getY(), r = data.getR();
         logger.info("Adding result to ResultBean: x={}, y={}, r={}, result={}", x, y, r, result);
         resultBean.add(new Point(x, y, r, result,
-                (double)(System.nanoTime() - startTime) / 1000000));
+                (double)(System.nanoTime() - data.getStartTime()) / 1000000));
 
         logger.info("Forwarding to /result.jsp");
         response.sendRedirect("/result.jsp");
