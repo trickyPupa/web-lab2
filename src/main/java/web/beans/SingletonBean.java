@@ -7,13 +7,16 @@ import java.util.ArrayList;
 
 @ApplicationScoped
 public class SingletonBean {
-    private static final SingletonBean instance = new SingletonBean();
+    private static SingletonBean instance = null;
 
     private final ArrayList<Point> list = new ArrayList<>();
 
     private SingletonBean() {}
 
     public static SingletonBean getInstance() {
+        if (instance == null) {
+            instance =  new SingletonBean();
+        }
         return instance;
     }
 
