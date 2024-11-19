@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import web.utils.PointCheckRequestDTO;
+import web.utils.PointCheckRequest;
 
 import java.io.IOException;
 
@@ -18,7 +18,8 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            PointCheckRequestDTO transfer = PointCheckRequestDTO.of(request);
+            request.setAttribute("startTime", System.nanoTime());
+            PointCheckRequest transfer = PointCheckRequest.of(request);
             request.setAttribute("data", transfer);
 
             logger.info("Forwarding to /check");

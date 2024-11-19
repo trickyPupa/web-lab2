@@ -2,32 +2,28 @@ package web.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-public class PointCheckRequestDTO {
+public class PointCheckRequest {
     private final double x;
     private final double y;
     private final double r;
-    private final long startTime;
 
-    public static PointCheckRequestDTO of(HttpServletRequest request)
+    public static PointCheckRequest of(HttpServletRequest request)
             throws NullPointerException, IllegalArgumentException {
         double x = Double.parseDouble(request.getParameter("x"));
         double y = Double.parseDouble(request.getParameter("y"));
         double r = Double.parseDouble(request.getParameter("r"));
 
-        long startTime = System.nanoTime();
-
         if (!validate(x, y, r)) {
             throw new IllegalArgumentException("некорректные данные");
         }
 
-        return new PointCheckRequestDTO(x, y, r, startTime);
+        return new PointCheckRequest(x, y, r);
     }
 
-    private PointCheckRequestDTO(double x, double y, double r, long startTime) {
+    private PointCheckRequest(double x, double y, double r) {
         this.x = x;
         this.y = y;
         this.r = r;
-        this.startTime = startTime;
     }
 
     public double getX() {
@@ -40,10 +36,6 @@ public class PointCheckRequestDTO {
 
     public double getR() {
         return r;
-    }
-
-    public long getStartTime() {
-        return startTime;
     }
 
     private static boolean validate(double x, double y, double r) {

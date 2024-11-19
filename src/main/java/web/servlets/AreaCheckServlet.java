@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import web.beans.ResultBean;
 import web.models.Point;
-import web.utils.PointCheckRequestDTO;
+import web.utils.PointCheckRequest;
 
 import java.io.IOException;
 
@@ -19,19 +19,12 @@ public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PointCheckRequestDTO data = (PointCheckRequestDTO) request.getAttribute("data");
+        PointCheckRequest data = (PointCheckRequest) request.getAttribute("data");
+        long startTime = (long) request.getAttribute("startTime");
         logger.info("Received GET request with parameters: x={}, y={}, r={}", data.getX(), data.getY(), data.getR());
 
         boolean result = checkArea(data.getX(), data.getY(), data.getR());
         logger.info("Area check result: {}", result);
-
-//        HttpSession session = request.getSession();
-//        ResultBean resultBean = (ResultBean) session.getAttribute("resultBean");
-//        if (resultBean == null) {
-//            logger.info("Creating new ResultBean for session");
-//            resultBean = new ResultBean();
-//            session.setAttribute("resultBean", resultBean);
-//        }
 
         HttpSession session = request.getSession();
         ResultBean resultBean = (ResultBean) session.getAttribute("resultBean");
@@ -44,7 +37,7 @@ public class AreaCheckServlet extends HttpServlet {
         double x = data.getX(), y = data.getY(), r = data.getR();
         logger.info("Adding result to ResultBean: x={}, y={}, r={}, result={}", x, y, r, result);
         resultBean.add(new Point(x, y, r, result,
-                (double)(System.nanoTime() - data.getStartTime()) / 1000000));
+                (double)(System.nanoTime() - startTime) / 1000000));
 
         logger.info("Forwarding to /result.jsp");
         response.sendRedirect("/result.jsp");
