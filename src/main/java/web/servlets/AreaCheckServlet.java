@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import web.beans.ResultBean;
 import web.beans.SingletonBean;
 import web.models.Point;
-import web.utils.PointCheckRequestDTO;
+import web.utils.PointCheckRequest;
 
 import java.io.IOException;
 
@@ -20,7 +20,8 @@ public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        PointCheckRequestDTO data = (PointCheckRequestDTO) request.getAttribute("data");
+        PointCheckRequest data = (PointCheckRequest) request.getAttribute("data");
+        long startTime = (long) request.getAttribute("startTime");
         logger.info("Received GET request with parameters: x={}, y={}, r={}", data.getX(), data.getY(), data.getR());
 
         boolean result = checkArea(data.getX(), data.getY(), data.getR());
@@ -39,7 +40,7 @@ public class AreaCheckServlet extends HttpServlet {
         logger.info("Adding result to ResultBean: x={}, y={}, r={}, result={}",
                 data.getX(), data.getY(), data.getR(), result);
         resultBean.add(new Point(data.getX(), data.getY(), data.getR(), result,
-                (double)(System.nanoTime() - data.getStartTime()) / 1000000));
+                (double)(System.nanoTime() - startTime) / 1000000));
 
         logger.info("Forwarding to /result.jsp");
         response.sendRedirect("/result.jsp");

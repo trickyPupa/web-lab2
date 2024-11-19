@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import web.utils.PointCheckRequestDTO;
+import web.utils.PointCheckRequest;
 
 import java.io.IOException;
 
@@ -18,7 +18,8 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            PointCheckRequestDTO transfer = PointCheckRequestDTO.of(request);
+            request.setAttribute("startTime", System.nanoTime());
+            PointCheckRequest transfer = PointCheckRequest.of(request);
             request.setAttribute("data", transfer);
 
             logger.info("Forwarding to /check");
@@ -30,6 +31,18 @@ public class ControllerServlet extends HttpServlet {
 
             request.setAttribute("errorMessage", "некорректные данные");
             getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        }
+    }
+
+    protected boolean validate(String xParam, String yParam, String rParam) {
+        try {
+            double x = Double.parseDouble(xParam);
+            double y = Double.parseDouble(yParam);
+            double r = Double.parseDouble(rParam);
+
+            return -1.25 * r <= x && x <= 1.25 * r && -1.25 * r <= y && y <= 1.25 * r && 1 <= r && r <= 5;
+        } catch ( NumberFormatException | NullPointerException e ) {
+            return false;
         }
     }
 }
