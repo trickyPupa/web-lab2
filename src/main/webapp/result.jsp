@@ -3,7 +3,9 @@
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="web.beans.SingletonBean" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -49,7 +51,8 @@
                 </thead>
                 <tbody id="records-body">
                 <%
-                    ResultBean results = (ResultBean) session.getAttribute("resultBean");
+//                    ResultBean results = (ResultBean) session.getAttribute("resultBean");
+                    SingletonBean results = SingletonBean.getInstance();
                     if (results != null) {
                         ArrayList<Point> list = results.getList();
                         Collections.reverse(list);
